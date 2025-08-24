@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Custom Report - Financial Suite</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .sidebar-shadow { box-shadow: 2px 0 4px rgba(0,0,0,0.1); }
+        .hover-bg:hover { background-color: #f9fafb; }
+        .nav-active { background-color: #dbeafe; color: #1d4ed8; }
+        .metric-card { 
+            transition: all 0.2s ease;
+            border: 1px solid #e5e7eb;
+        }
+        .metric-card:hover { 
+            transform: translateY(-1px); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #3b82f6;
+        }
+        .metric-selected {
+            border-color: #3b82f6 !important;
+            background-color: #eff6ff !important;
+        }
+        .tab-button {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .tab-active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .tab-inactive {
+            background-color: #f3f4f6;
+            color: #6b7280;
+        }
+        .metric-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white sidebar-shadow">
+            <div class="p-4">
+                <!-- Back Button -->
+                <div class="flex items-center mb-4 text-gray-600 cursor-pointer hover:text-gray-800">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    <span class="text-sm font-medium">Financial Suite</span>
+                </div>
+                
+                <!-- Navigation -->
+                <nav class="space-y-1">
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
+                        <span class="text-sm">Dashboard</span>
+                    </a>
+                    
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
+                        <span class="text-sm">Deferred Sales</span>
+                    </a>
+                    
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
+                        <span class="text-sm">Reports</span>
+                    </a>
+                    
+                    <!-- Custom Reports Section (Active) -->
+                    <div class="nav-active rounded-md px-3 py-2">
+                        <span class="text-sm font-medium">Custom Reports</span>
+                    </div>
+                    
+                    <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
+                        <span class="text-sm">Migration Status</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col">
+            <!-- Header -->
+            <div class="bg-white border-b border-gray-200 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-semibold text-gray-900">Create Custom Report</h1>
+                        <p class="text-sm text-gray-600 mt-1">Build a custom report with your preferred metrics, filters, and visualizations</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button class="flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm hover-bg">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                            Cancel
+                        </button>
+                        <button class="flex items-center px-3 py-2 border border-gray-300 rounded-md text-sm hover-bg">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            </svg>
+                            Preview
+                        </button>
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 flex items-center">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                            </svg>
+                            Save Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-1">
+                <!-- Report Builder Area -->
+                <div class="flex-1 p-6">
+                    <!-- Report Details -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+                        <h2 class="text-lg font-medium text-gray-900 mb-4">Report Details</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Report Name</label>
+                                <input type="text" placeholder="Enter report name..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                                <textarea placeholder="Describe what this report shows..." rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none text-sm"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Report Canvas -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+                        <div class="text-center">
+                            <div class="mx-auto mb-6">
+                                <svg class="h-24 w-24 text-gray-300 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-medium text-gray-900 mb-2">Start Building Your Report</h3>
+                            <p class="text-gray-600 max-w-md mx-auto">Select metric cards and KPI widgets from the right panel to build your custom report</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Build Your Report -->
+                <div class="w-96 bg-white border-l border-gray-200 overflow-auto">
+                    <div class="p-6">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">Build Your Report</h3>
+                            <span class="text-sm text-gray-500">0 selected</span>
+                        </div>
+
+                        <!-- Tabs -->
+                        <div class="flex space-x-1 mb-6 bg-gray-100 p-1 rounded-lg">
+                            <button class="tab-button tab-active flex-1 text-center" id="metricsTab">
+                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                                Metrics
+                            </button>
+                            <button class="tab-button tab-inactive flex-1 text-center" id="filtersTab">
+                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z"></path>
+                                </svg>
+                                Filters
+                            </button>
+                            <button class="tab-button tab-inactive flex-1 text-center" id="groupByTab">
+                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14-7H3m16 14H7m6 4l4-4-4-4"></path>
+                                </svg>
+                                Group By
+                            </button>
+                        </div>
+
+                        <!-- Secondary Tabs -->
+                        <div class="flex space-x-1 mb-6">
+                            <button class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-600 hover:bg-gray-50">
+                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                </svg>
+                                Charts
+                            </button>
+                            <button class="px-3 py-1 text-sm border border-gray-300 rounded text-gray-600 hover:bg-gray-50">
+                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                                </svg>
+                                Widgets
+                            </button>
+                        </div>
+
+                        <!-- Available Metrics -->
+                        <div class="mb-4">
+                            <h4 class="text-sm font-medium text-gray-900 mb-3">Available Metrics</h4>
+                        </div>
+
+                        <!-- Metrics List -->
+                        <div class="space-y-3" id="metricsList">
+                            <!-- Qty Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="qty">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-blue-100 rounded flex items-center justify-center">
+                                            <span class="text-blue-600 text-xs">#</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Qty</div>
+                                            <div class="text-xs text-gray-500">Quantity</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Sales</div>
+                                </div>
+                            </div>
+
+                            <!-- Channel Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="channel">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-green-100 rounded flex items-center justify-center">
+                                            <span class="text-green-600 text-xs">📱</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Channel</div>
+                                            <div class="text-xs text-gray-500">Sales channel</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Sales</div>
+                                </div>
+                            </div>
+
+                            <!-- Transaction Count Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="transaction-count">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-purple-100 rounded flex items-center justify-center">
+                                            <span class="text-purple-600 text-xs">🧾</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Transaction Count</div>
+                                            <div class="text-xs text-gray-500">Number of transactions</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Sales</div>
+                                </div>
+                            </div>
+
+                            <!-- Amount Discounted Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="amount-discounted">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-orange-100 rounded flex items-center justify-center">
+                                            <span class="text-orange-600 text-xs">%</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Amount Discounted</div>
+                                            <div class="text-xs text-gray-500">Total amount discounted</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Sales</div>
+                                </div>
+                            </div>
+
+                            <!-- Gross Sales Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="gross-sales">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-green-100 rounded flex items-center justify-center">
+                                            <span class="text-green-600 text-xs">💰</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Gross Sales</div>
+                                            <div class="text-xs text-gray-500">Total sales before deductions</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Sales</div>
+                                </div>
+                            </div>
+
+                            <!-- Net Sales Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="net-sales">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-blue-100 rounded flex items-center justify-center">
+                                            <span class="text-blue-600 text-xs">💵</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Net Sales</div>
+                                            <div class="text-xs text-gray-500">Sales after returns and discounts</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Sales</div>
+                                </div>
+                            </div>
+
+                            <!-- Item Name Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="item-name">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-gray-100 rounded flex items-center justify-center">
+                                            <span class="text-gray-600 text-xs">📦</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Item Name</div>
+                                            <div class="text-xs text-gray-500">Name of the item</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Item Info</div>
+                                </div>
+                            </div>
+
+                            <!-- Category Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="category">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-indigo-100 rounded flex items-center justify-center">
+                                            <span class="text-indigo-600 text-xs">📂</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Category</div>
+                                            <div class="text-xs text-gray-500">Item category</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Categories</div>
+                                </div>
+                            </div>
+
+                            <!-- Tax Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="tax">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-red-100 rounded flex items-center justify-center">
+                                            <span class="text-red-600 text-xs">🏛️</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Tax</div>
+                                            <div class="text-xs text-gray-500">Tax amount</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Sales</div>
+                                </div>
+                            </div>
+
+                            <!-- Returns Amount Metric -->
+                            <div class="metric-card p-3 rounded-lg cursor-pointer" data-metric="returns-amount">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="metric-icon bg-yellow-100 rounded flex items-center justify-center">
+                                            <span class="text-yellow-600 text-xs">↩️</span>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">Returns Amount</div>
+                                            <div class="text-xs text-gray-500">Total value of returns</div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded">Returns</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedMetrics = [];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = ['metricsTab', 'filtersTab', 'groupByTab'];
+            
+            tabs.forEach(tabId => {
+                document.getElementById(tabId).addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(id => {
+                        const tab = document.getElementById(id);
+                        tab.classList.remove('tab-active');
+                        tab.classList.add('tab-inactive');
+                    });
+                    
+                    // Add active class to clicked tab
+                    this.classList.remove('tab-inactive');
+                    this.classList.add('tab-active');
+                });
+            });
+
+            // Metric card selection
+            const metricCards = document.querySelectorAll('.metric-card');
+            
+            metricCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const metricId = this.dataset.metric;
+                    
+                    if (this.classList.contains('metric-selected')) {
+                        // Deselect
+                        this.classList.remove('metric-selected');
+                        selectedMetrics = selectedMetrics.filter(id => id !== metricId);
+                    } else {
+                        // Select
+                        this.classList.add('metric-selected');
+                        selectedMetrics.push(metricId);
+                    }
+                    
+                    // Update counter
+                    document.querySelector('.text-sm.text-gray-500').textContent = `${selectedMetrics.length} selected`;
+                    
+                    // Add visual feedback
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Add hover effects to buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('bg-blue-600')) {
+                        this.style.transform = 'translateY(-1px)';
+                    }
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
