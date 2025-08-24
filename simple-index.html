@@ -15,112 +15,85 @@
         <!-- Sidebar -->
         <div class="w-64 bg-white sidebar-shadow">
             <div class="p-4">
-                <!-- User Profile -->
-                <div class="flex items-center mb-6 pb-4 border-b border-gray-200">
-                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-3">
-                        <span class="text-white text-sm font-medium">R</span>
-                    </div>
-                    <div>
-                        <div class="text-sm font-medium text-gray-900">Ruby of the Rockies</div>
-                        <div class="text-xs text-gray-500">Store Owner</div>
-                    </div>
-                    <svg class="w-4 h-4 ml-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </div>
-                
-                <!-- Search -->
-                <div class="relative mb-6">
-                    <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                    <input type="text" placeholder="Search" class="w-full pl-10 pr-4 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                </div>
-                
-                <!-- Navigation -->
-                <nav class="space-y-1">
-                    <a href="home.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z"></path>
+                <div class="flex items-center mb-6">
+                    <button class="mr-3 p-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
-                        Home
-                    </a>
-                    
-                    <!-- Items & services Section (Active) -->
-                    <div class="nav-active rounded-md" style="background-color: #dbeafe; color: #1d4ed8;">
-                        <a href="index.html" class="flex items-center px-3 py-2 text-sm font-medium">
-                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                    </button>
+                    <h2 class="text-lg font-semibold text-gray-900">Items & services</h2>
+                </div>
+                
+                <nav class="space-y-1">
+                    <div class="mb-4">
+                        <button class="flex items-center w-full text-left px-2 py-2 text-sm font-medium text-gray-900 hover-bg rounded-md">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
-                            Items & services
-                        </a>
-                        <!-- Sub-navigation for Items -->
-                        <div class="ml-8 mt-1 space-y-1">
-                            <a href="index.html" class="block px-3 py-1 text-xs text-blue-800 font-medium bg-blue-100 rounded">Categories</a>
-                            <a href="item-library.html" class="block px-3 py-1 text-xs text-blue-600 hover:text-blue-800">Item library</a>
-                            <a href="channel-listings.html" class="block px-3 py-1 text-xs text-blue-600 hover:text-blue-800">Channel listings</a>
-                            <a href="service-library.html" class="block px-3 py-1 text-xs text-blue-600 hover:text-blue-800">Service library</a>
+                            Items
+                        </button>
+                        
+                        <div class="ml-6 space-y-1">
+                            <button class="block w-full text-left px-2 py-2 text-sm bg-blue-50 text-blue-700 font-medium rounded-md">
+                                Item library
+                            </button>
+                            <button class="block w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                                Channel listings
+                            </button>
+                            <button class="block w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                                Service library
+                            </button>
+                            <button class="block w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                                Image library
+                            </button>
+                            <button class="block w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                                Modifiers
+                            </button>
+                            <button class="block w-full text-left px-2 py-2 text-sm bg-gray-100 text-gray-900 font-medium rounded-md">
+                                Categories
+                            </button>
+                            <button class="block w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                                Discounts
+                            </button>
+                            <button class="block w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                                Options
+                            </button>
+                            <button class="block w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                                Units
+                            </button>
+                            <button class="block w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                                Custom attributes
+                            </button>
                         </div>
                     </div>
-                    
-                    <a href="payments.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                        </svg>
-                        Payments & invoices
-                    </a>
-                    
-                    <a href="online.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
-                        </svg>
-                        Online
-                    </a>
-                    
-                    <a href="customers.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-                        </svg>
-                        Customers
-                    </a>
-                    
-                    <a href="custom-item-sales.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
-                        Reports
-                    </a>
-                    
-                    <a href="staff.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                        Staff
-                    </a>
-                    
-                    <a href="banking.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        Banking
-                    </a>
-                    
-                    <a href="settings.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </nav>
+            </div>
+            
+            <!-- Bottom sections -->
+            <div class="absolute bottom-0 w-64 p-4 space-y-2">
+                <div class="space-y-1">
+                    <button class="flex items-center w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                         Settings
-                    </a>
-                    
-                    <a href="add-more.html" class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover-bg">
-                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </button>
+                    <button class="flex items-center w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
-                        Add more
-                    </a>
-                </nav>
+                        Inventory management
+                    </button>
+                    <button class="flex items-center w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                        Gift Cards
+                    </button>
+                    <button class="block w-full text-left px-2 py-2 text-sm text-gray-700 hover-bg rounded-md">
+                        Subscription plans
+                    </button>
+                </div>
             </div>
         </div>
 
