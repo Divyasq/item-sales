@@ -889,6 +889,60 @@
                         </div>
                     </div>
                 `;
+            } else if (tabName === 'Group By') {
+                metricsPanel.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="p-4 border border-gray-200 rounded-lg">
+                            <h4 class="font-medium text-sm mb-3">Group By Options</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="groupBy" value="category" class="mr-3">
+                                    <div>
+                                        <div class="text-sm font-medium">Category (Hierarchical)</div>
+                                        <div class="text-xs text-gray-600">Shows parent-child category structure to avoid double counting</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="groupBy" value="reportingCategory" class="mr-3">
+                                    <div>
+                                        <div class="text-sm font-medium">Reporting Category</div>
+                                        <div class="text-xs text-gray-600">Groups by primary reporting category only</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="groupBy" value="itemName" class="mr-3">
+                                    <div>
+                                        <div class="text-sm font-medium">Item Name</div>
+                                        <div class="text-xs text-gray-600">Individual item breakdown</div>
+                                    </div>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="groupBy" value="location" class="mr-3">
+                                    <div>
+                                        <div class="text-sm font-medium">Location</div>
+                                        <div class="text-xs text-gray-600">Group by store location</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4 border border-gray-200 rounded-lg bg-blue-50">
+                            <h4 class="font-medium text-sm mb-2 text-blue-900">💡 Category Grouping Example</h4>
+                            <div class="text-xs text-blue-800 space-y-1">
+                                <div><strong>Scenario:</strong> Firewood 6 Logs belongs to both:</div>
+                                <div class="ml-3">• Household (parent)</div>
+                                <div class="ml-3">• Household Outdoor/Camping (child)</div>
+                                <div class="mt-2"><strong>Hierarchical View:</strong></div>
+                                <div class="ml-3 font-mono text-xs">
+                                    <div>📁 Household ($189.97)</div>
+                                    <div class="ml-4">├── Household Kitchen ($15.99)</div>
+                                    <div class="ml-4">└── Household Outdoor/Camping ($173.98)</div>
+                                </div>
+                                <div class="mt-2 text-blue-700"><strong>Benefit:</strong> No double counting - sales roll up correctly!</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
             } else if (tabName === 'Charts') {
                 metricsPanel.innerHTML = `
                     <div class="space-y-4">
@@ -1070,21 +1124,41 @@
             newHeader.dataset.metric = metricName;
             tableHeader.appendChild(newHeader);
             
-            // Sample data for different metrics
+            // Enhanced sample data with realistic item categories
             const sampleData = {
-                'Item Name': ['Espresso', 'Croissant', 'Latte', 'Turkey Sandwich', 'Blueberry Muffin'],
-                'Categories': ['Beverages', 'Pastries', 'Beverages', 'Food', 'Pastries'],
-                'Gross Sales': ['$468.00', '$267.00', '$1,170.00', '$603.00', '$129.00'],
-                'Net Sales': ['$445.60', '$267.00', '$1,111.50', '$603.00', '$116.10'],
-                'Qty': ['156', '89', '234', '67', '43'],
-                'Channel': ['In-Store', 'In-Store', 'In-Store', 'In-Store', 'In-Store'],
-                'Transaction Count': ['78', '45', '117', '34', '22'],
-                'Amount Discounted': ['-$22.40', '$0.00', '-$58.50', '$0.00', '-$12.90'],
-                'Tax': ['$23.40', '$13.35', '$58.50', '$30.15', '$6.45'],
+                'Item Name': ['Firewood 6 Logs', 'Holiday Candles', 'Camping Coffee', 'Kitchen Towels', 'Outdoor Blanket'],
+                'Categories': [
+                    'Household, Household Outdoor/Camping',
+                    'Merchandise, Merchandise_Holiday, Household', 
+                    'Grocery, Grocery Beverages, Household Outdoor/Camping',
+                    'Household, Household Kitchen, Merchandise_Home Goods',
+                    'Merchandise, Merchandise_Apparel, Household Outdoor/Camping'
+                ],
+                'Reporting Category': [
+                    'Household Outdoor/Camping',
+                    'Merchandise_Holiday', 
+                    'Grocery Beverages',
+                    'Household Kitchen',
+                    'Merchandise_Apparel'
+                ],
+                'Category Rollup': [
+                    'Household',
+                    'Merchandise, Household', 
+                    'Grocery, Household',
+                    'Household, Merchandise',
+                    'Merchandise, Household'
+                ],
+                'Gross Sales': ['$89.99', '$24.99', '$12.99', '$15.99', '$45.99'],
+                'Net Sales': ['$85.49', '$23.74', '$12.34', '$15.19', '$43.69'],
+                'Qty': ['12', '8', '24', '15', '6'],
+                'Channel': ['In-Store', 'Online', 'In-Store', 'In-Store', 'Online'],
+                'Transaction Count': ['8', '6', '18', '12', '4'],
+                'Amount Discounted': ['-$4.50', '-$1.25', '-$0.65', '-$0.80', '-$2.30'],
+                'Tax': ['$7.20', '$2.00', '$1.04', '$1.28', '$3.68'],
                 'Location': ['Main Store', 'Main Store', 'Main Store', 'Main Store', 'Main Store'],
-                'SKU': ['ESP001', 'CRO001', 'LAT001', 'SAN001', 'MUF001'],
+                'SKU': ['FW001', 'HC002', 'CC003', 'KT004', 'OB005'],
                 'GTIN': ['1234567890123', '1234567890124', '1234567890125', '1234567890126', '1234567890127'],
-                'Returns Amount': ['$0.00', '$0.00', '$25.00', '$0.00', '$0.00']
+                'Returns Amount': ['$0.00', '$0.00', '$12.99', '$0.00', '$0.00']
             };
             
             // Create rows if they don't exist
@@ -1104,6 +1178,17 @@
                 
                 const data = sampleData[metricName] || [`Value ${index + 1}`, `Value ${index + 2}`, `Value ${index + 3}`, `Value ${index + 4}`, `Value ${index + 5}`];
                 newCell.textContent = data[index] || 'N/A';
+                
+                // Special styling for multi-category cells
+                if (metricName === 'Categories' || metricName === 'Category Rollup') {
+                    newCell.className += ' text-xs';
+                    if (data[index] && data[index].includes(',')) {
+                        newCell.innerHTML = data[index].split(',').map(cat => 
+                            `<span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs mr-1 mb-1">${cat.trim()}</span>`
+                        ).join('');
+                    }
+                }
+                
                 row.appendChild(newCell);
             });
         }
