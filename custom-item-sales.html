@@ -898,32 +898,9 @@
                             <div class="space-y-3">
                                 <label class="flex items-center cursor-pointer">
                                     <input type="checkbox" name="groupBy" value="category" class="mr-3" id="categoryHierarchical">
-                                    <div class="flex items-center">
-                                        <div>
-                                            <div class="text-sm font-medium">Category (Hierarchical)</div>
-                                            <div class="text-xs text-gray-600">Shows parent-child category structure to avoid double counting</div>
-                                        </div>
-                                        <div class="ml-2 relative group">
-                                            <svg class="w-4 h-4 text-blue-500 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
-                                            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-80 p-3 bg-blue-900 text-white text-xs rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50">
-                                                <div class="font-semibold mb-2">💡 Category Grouping Example</div>
-                                                <div class="space-y-1">
-                                                    <div><strong>Scenario:</strong> Firewood 6 Logs belongs to both:</div>
-                                                    <div class="ml-3">• Household (parent)</div>
-                                                    <div class="ml-3">• Household Outdoor/Camping (child)</div>
-                                                    <div class="mt-2"><strong>Hierarchical View:</strong></div>
-                                                    <div class="ml-3 font-mono text-xs">
-                                                        <div>📁 Household ($189.97)</div>
-                                                        <div class="ml-4">├── Household Kitchen ($15.99)</div>
-                                                        <div class="ml-4">└── Household Outdoor/Camping ($173.98)</div>
-                                                    </div>
-                                                    <div class="mt-2"><strong>Benefit:</strong> No double counting - sales roll up correctly!</div>
-                                                </div>
-                                                <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-blue-900"></div>
-                                            </div>
-                                        </div>
+                                    <div>
+                                        <div class="text-sm font-medium">Category (Hierarchical)</div>
+                                        <div class="text-xs text-gray-600">Shows parent-child category structure to avoid double counting</div>
                                     </div>
                                 </label>
                                 <label class="flex items-center cursor-pointer">
@@ -1057,6 +1034,21 @@
                                 buildHierarchicalView();
                             } else {
                                 buildGroupedView(metricName);
+                            }
+                        });
+                    });
+
+                    // Add event listeners for the checkboxes at the top
+                    const groupByCheckboxes = document.querySelectorAll('input[name="groupBy"]');
+                    groupByCheckboxes.forEach(checkbox => {
+                        checkbox.addEventListener('change', function() {
+                            if (this.checked) {
+                                const value = this.value;
+                                if (value === 'category') {
+                                    buildHierarchicalView();
+                                } else {
+                                    buildGroupedView(value);
+                                }
                             }
                         });
                     });
