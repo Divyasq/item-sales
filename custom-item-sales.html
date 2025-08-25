@@ -1040,13 +1040,17 @@
 
                     // Add event listeners for the checkboxes at the top
                     const groupByCheckboxes = document.querySelectorAll('input[name="groupBy"]');
+                    console.log('Found checkboxes:', groupByCheckboxes.length);
                     groupByCheckboxes.forEach(checkbox => {
                         checkbox.addEventListener('change', function() {
+                            console.log('Checkbox changed:', this.value, 'checked:', this.checked);
                             if (this.checked) {
                                 const value = this.value;
                                 if (value === 'category') {
+                                    console.log('Building hierarchical view...');
                                     buildHierarchicalView();
                                 } else {
+                                    console.log('Building grouped view for:', value);
                                     buildGroupedView(value);
                                 }
                             }
