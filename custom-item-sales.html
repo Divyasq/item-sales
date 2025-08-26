@@ -1490,6 +1490,14 @@
                     </table>
                 </div>
             `;
+            
+            // Add event listener for the edit button
+            setTimeout(() => {
+                const editBtn = document.getElementById('editGroupedTableBtn');
+                if (editBtn) {
+                    editBtn.addEventListener('click', toggleTableEditMode);
+                }
+            }, 100);
         }
 
         function generateGroupedTableRows(metricName) {
@@ -1658,8 +1666,48 @@
         }
 
         function toggleTableEditMode() {
-            // This would implement table editing functionality for the main table
-            alert('Table edit mode would be implemented here - allowing users to modify the table structure and data');
+            // Get the grouped table (first table in your screenshot)
+            const groupedContainer = document.getElementById('groupedContainer');
+            if (!groupedContainer || groupedContainer.classList.contains('hidden')) {
+                alert('Please select a grouping option first to enable table editing');
+                return;
+            }
+            
+            const table = groupedContainer.querySelector('table');
+            const editBtn = groupedContainer.querySelector('#editGroupedTableBtn');
+            
+            if (!table) {
+                alert('No table found to edit');
+                return;
+            }
+            
+            const isEditing = editBtn.textContent.trim() === 'Save Changes';
+            
+            if (isEditing) {
+                // Save mode - convert back to display
+                const cells = table.querySelectorAll('tbody td');
+                cells.forEach(cell => {
+                    const input = cell.querySelector('input');
+                    if (input) {
+                        cell.textContent = input.value;
+                        cell.classList.remove('p-0');
+                    }
+                });
+                editBtn.textContent = 'Edit Table';
+                editBtn.classList.remove('bg-green-600', 'text-white');
+                editBtn.classList.add('text-gray-600', 'border-gray-300');
+            } else {
+                // Edit mode - convert cells to inputs
+                const cells = table.querySelectorAll('tbody td');
+                cells.forEach(cell => {
+                    const currentText = cell.textContent.trim();
+                    cell.innerHTML = `<input type="text" value="${currentText}" class="w-full px-2 py-1 text-sm border-0 focus:ring-1 focus:ring-blue-500 bg-transparent">`;
+                    cell.classList.add('p-0');
+                });
+                editBtn.textContent = 'Save Changes';
+                editBtn.classList.remove('text-gray-600', 'border-gray-300');
+                editBtn.classList.add('bg-green-600', 'text-white');
+            }
         }
     </script>
 </body>
